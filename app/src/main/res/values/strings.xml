@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">StyleSplash</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_home_tl">Style &amp; Splash</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="hint_loginid">Mobile Number</string>
+    <string name="hint_password">PIN</string>
+    <string name="hint_today">Today</string>
+    <string name="hint_orderlist">Order List</string>
+    <string name="hint_product">Product Stock</string>
+    <string name="hint_cuslist">Customer List</string>
+    <string name="hint_ordertrack">Track Order</string>
+    <string name="hint_addorder">New Order</string>
+    <string name="hint_adcust">Add Customer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_olist">Order List</string>
+    <string name="menu_otrack">Track Order</string>
+    <string name="menu_cuslist">Customer List</string>
+    <string name="delivered">SALES</string>
+    <string name="inpro">IN PROCESS</string>
+    <string name="cancle">CANCEL</string>
+    <string name="menu_adorder">Add Order</string>
+    <string name="hint_custname">Customer Name *</string>
+    <string name="hint_custmobile">Mobile *</string>
+    <string name="hint_custadd">Address</string>
+    <string name="menu_invoice">Invoice</string>
+    <string name="hint_custbal">Previous Due</string>
+    <string name="hint_custemail">Email</string>
+    <string name="action_view">View</string>
+    <string name="action_sale">Sale Order</string>
+    <string name="action_cancle">Cancel</string>
+    <string name="action_del">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="all">All Order</string>
+    <string name="product">Item</string>
+    <string name="qty">Quantity</string>
+    <string name="hint_pay">Payment</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="menu_norder">New Order</string>
+    <string name="action_process">In Process</string>
+    <string name="freshproduct">Fresh Product</string>
+    <string name="damageproduct">Damage Product</string>
+    <string name="menu_allp">Product Stock</string>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/swip_prod"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.product.ProductStockFragment">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+ <androidx.recyclerview.widget.RecyclerView
+     android:id="@+id/stockrv"
+     android:layout_width="match_parent"
+     android:layout_height="0dp"
+     app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent">
+
+ </androidx.recyclerview.widget.RecyclerView>
+
+ <LinearLayout
+     android:id="@+id/linearLayout3"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:elevation="@dimen/_5sdp"
+     app:layout_constraintBottom_toBottomOf="parent">
+  <EditText
+      android:elevation="@dimen/_5sdp"
+      android:id="@+id/search_prod"
+      android:padding="@dimen/_4sdp"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_34sdp"
+      android:background="@color/colorBg"
+      android:layout_marginStart="@dimen/_8sdp"
+      android:layout_marginEnd="@dimen/_8sdp"
+      android:textSize="16sp"
+      android:drawableRight="@drawable/ic_search"
+      android:drawableTint="@color/black"
+      android:paddingRight="@dimen/_5sdp"
+      android:fontFamily="@font/roboto_light"
+      android:textColor="@color/black"/>
+ </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

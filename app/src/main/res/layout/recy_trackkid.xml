@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/_4sdp"
+    android:id="@+id/trackidcard"
+    android:layout_margin="@dimen/_2sdp"
+    android:backgroundTint="@color/colorBg"
+    >
+<LinearLayout
+    android:padding="@dimen/_2sdp"
+    android:layout_margin="@dimen/_2sdp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/trackid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="trackid"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/trackname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/trackdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="date"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

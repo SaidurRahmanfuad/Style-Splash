@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:padding="4dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_15sdp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:text="Product"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content"
+            android:background="#5A5959" />
+
+        <TextView
+            android:id="@+id/itemQty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="QTY"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content"
+            android:background="#5A5959" />
+
+        <TextView
+            android:id="@+id/itemUprice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Unit Price"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content"
+            android:background="#5A5959" />
+
+        <TextView
+            android:id="@+id/itemStotal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Sub Total"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content"
+           />
+    </LinearLayout>
+
+</LinearLayout>

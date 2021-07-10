@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.saidur.stylesplash.ui.home.HomeFragment"
+        android:label="@string/menu_home_tl"
+        tools:layout="@layout/fragment_home" >
+
+        <action android:id="@+id/goto_home_to_trackorderAc"
+            app:destination="@+id/nav_otrack"/>
+
+        <action android:id="@+id/goto_home_to_productstock"
+            app:destination="@+id/men_ps"/>
+       <!-- <action android:id="@+id/goto_home_to_productstock"
+            app:destination="@+id/nav_productAll"/>-->
+
+        <action android:id="@+id/goto_home_to_orderlist"
+            app:destination="@+id/nav_allorder"/>
+
+        <action android:id="@+id/goto_home_to_cuslist"
+            app:destination="@+id/nav_custlist"/>
+
+        <action android:id="@+id/goto_home_to_addorder"
+            app:destination="@+id/men_addorder"/>
+
+        <action android:id="@+id/goto_home_to_addcust"
+            app:destination="@+id/men_addcust"/>
+
+    </fragment>
+
+    <!--<fragment
+        android:id="@+id/nav_orderlist"
+        android:name="com.saidur.stylesplash.ui.order.OrderListFragment"
+        android:label="@string/menu_olist"
+        tools:layout="@layout/fragment_order_list" />-->
+    <fragment
+        android:id="@+id/men_ps"
+        android:name="com.saidur.stylesplash.ui.product.ProductStockFragment"
+        android:label="@string/hint_product"
+        tools:layout="@layout/fragment_product_stock" />
+    <fragment
+        android:id="@+id/men_addorder"
+        android:name="com.saidur.stylesplash.ui.order.AddOrderFragment"
+        android:label="@string/menu_adorder"
+        tools:layout="@layout/fragment_add_order" >
+        <action android:id="@+id/goto_addOrder_to_invoice"
+            app:destination="@+id/nav_invoice"/>
+        <action
+            android:id="@+id/goto_addOrder_to_addcust"
+            app:destination="@+id/men_addcust"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/men_addcust"
+        android:name="com.saidur.stylesplash.ui.customer.AddCustFragment"
+        android:label="@string/hint_adcust"
+        tools:layout="@layout/fragment_add_cust" >
+        <action
+            android:id="@+id/action_men_addcust_to_men_addorder"
+            app:destination="@id/men_addorder" />
+        <action
+            android:id="@+id/action_men_addcust_to_nav_custlist"
+            app:destination="@id/nav_custlist"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_men_addcust_to_men_addorder2"
+            app:destination="@id/men_addorder" />
+        <!-- <action
+             android:id="@+id/action_men_addcust_to_men_custlist"
+             app:destination="@id/nav_custlist" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/nav_custlist"
+        android:name="com.saidur.stylesplash.ui.customer.CustomerListFragment"
+        android:label="@string/menu_cuslist"
+        tools:layout="@layout/fragment_customer_list" >
+    </fragment>
+
+
+    <activity
+        android:id="@+id/nav_allorder"
+        android:name="com.saidur.stylesplash.ui.order.AllOrdersAc"
+        android:label="@string/menu_olist"
+        />
+    <activity
+        android:id="@+id/nav_productAll"
+        android:name="com.saidur.stylesplash.ui.product.ProductMainActivity"
+        android:label="@string/menu_allp"
+        />
+    <activity
+        android:id="@+id/nav_otrack"
+        android:name="com.saidur.stylesplash.ui.order.trackorder.track.TrackOrderActivity"
+        android:label="@string/menu_otrack"
+        />
+    <activity
+        android:id="@+id/nav_invoice"
+        android:name="com.saidur.stylesplash.ui.order.InvoiceActivity"
+        android:label="@string/menu_invoice"
+        />
+</navigation>

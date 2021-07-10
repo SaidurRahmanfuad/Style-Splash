@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/men_process"
+        android:orderInCategory="100"
+        android:title="@string/action_process"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/men_sale"
+        android:orderInCategory="100"
+        android:title="@string/action_sale"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/men_cancle"
+        android:orderInCategory="100"
+        android:title="@string/action_cancle"
+        app:showAsAction="never" />
+
+</menu>

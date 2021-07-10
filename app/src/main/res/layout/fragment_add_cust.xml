@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.customer.AddCustFragment">
+
+ <LinearLayout
+     android:id="@+id/lldate"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="@dimen/_5sdp"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent">
+
+  <TextView
+      android:id="@+id/datetag"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:fontFamily="@font/roboto_light"
+      android:text="Today : "
+      android:textColor="@color/black"
+      android:textSize="16sp" />
+
+  <TextView
+      android:id="@+id/datecust"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:fontFamily="@font/roboto_light"
+      android:text="9.03.2021"
+      android:textColor="@color/black"
+      android:textSize="16sp" />
+ </LinearLayout>
+
+
+ <LinearLayout
+     android:id="@+id/tag_addproductlayout"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     android:layout_marginLeft="16dp"
+     android:layout_marginRight="16dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/lldate">
+
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/roboto_light"
+      android:hint="@string/hint_custmobile"
+      app:startIconTint="#00C853">
+
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/add_custmobile"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/roboto_light"
+       android:inputType="phone"
+       android:maxLength="11"
+       android:singleLine="true"
+       android:textColor="@color/black"
+       android:textSize="14sp" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/roboto_light"
+      android:hint="@string/hint_custname"
+      app:startIconTint="#00C853">
+
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/add_custName"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/roboto_light"
+       android:inputType="text"
+       android:singleLine="true"
+       android:textColor="@color/black"
+       android:textSize="14sp" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/roboto_light"
+      android:hint="@string/hint_custadd"
+      app:startIconTint="#00C853">
+
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/add_custadd"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/roboto_light"
+       android:inputType="text"
+       android:singleLine="true"
+       android:textColor="@color/black"
+       android:textSize="14sp" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+
+
+ <!-- <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/roboto_light"
+      android:hint="@string/hint_custemail"
+      app:startIconTint="#00C853">
+
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/add_custemail"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/roboto_light"
+       android:inputType="textEmailAddress"
+       android:singleLine="true"
+       android:textColor="@color/black"
+       android:textSize="14sp" />
+
+  </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+  <!--<com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:fontFamily="@font/roboto_light"
+      android:hint="@string/hint_custbal"
+      app:startIconTint="#00C853">
+
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/add_custbal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/roboto_light"
+       android:inputType="numberDecimal"
+       android:singleLine="true"
+       android:textColor="@color/black"
+       android:textSize="14sp" />
+
+  </com.google.android.material.textfield.TextInputLayout>-->
+ </LinearLayout>
+
+ <LinearLayout
+     android:id="@+id/llbutton"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginLeft="16dp"
+     android:layout_marginRight="16dp"
+     android:orientation="horizontal"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/tag_addproductlayout">
+
+  <Button
+      android:id="@+id/add_custSave"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:fontFamily="@font/roboto"
+      android:padding="4dp"
+      android:text="Save"
+      android:textAllCaps="false"
+      android:textSize="14sp">
+
+
+  </Button>
+
+  <!--  <Button
+        android:id="@+id/add_productSaveandNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/roboto"
+        android:padding="4dp"
+        android:text="Save &amp; Add new"
+        android:textAllCaps="false"
+        android:textSize="14sp">
+
+
+    </Button>-->
+ </LinearLayout>
+
+ <View
+     android:layout_width="match_parent"
+     android:layout_height="5dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/llbutton" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_loginid">Mobile Number</string>
+    <string name="hint_password">PIN</string>
+    <string name="hint_today">Today</string>
+    <string name="hint_orderlist">Order List</string>
+    <string name="hint_product">Product Stock</string>
+    <string name="hint_cuslist">Customer List</string>
+    <string name="hint_ordertrack">Track Order</string>
+    <string name="hint_addorder">New Order</string>
+    <string name="hint_adcust">Add Customer</string>
+    <string name="menu_olist">Order List</string>
+    <string name="menu_otrack">Track Order</string>
+    <string name="menu_cuslist">Customer List</string>
+    <string name="delivered">Delivered</string>
+    <string name="inpro">IN PROCESS</string>
+    <string name="cancle">Cancel</string>
+    <string name="menu_adorder">Add Order</string>
+    <string name="hint_custname">Customer Name *</string>
+    <string name="hint_custmobile">Mobile *</string>
+    <string name="hint_custadd">Address</string>
+    <string name="menu_invoice">Invoice</string>
+    <string name="hint_custbal">Previous Due</string>
+    <string name="hint_custemail">Email</string>
+    <string name="action_view">View</string>
+    <string name="action_sale">Sale Order</string>
+    <string name="action_cancle">Cancel</string>
+    <string name="action_del">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="all">All Order</string>
+    <string name="product">Item</string>
+    <string name="qty">Quantity</string>
+    <string name="hint_pay">Payment</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="menu_norder">New Order</string>
+    <string name="action_process">In Process</string>
+    <string name="freshproduct">Fresh Product</string>
+    <string name="damageproduct">Damage Product</string>
+    <string name="menu_allp">Product Stock</string>
+</resources>

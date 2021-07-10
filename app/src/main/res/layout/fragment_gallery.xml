@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+  >
+
+<!-- <Button
+     android:id="@+id/convertbtn"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="Currency Convert"
+     android:textAllCaps="false"
+     android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+    <Button
+        android:id="@+id/developerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer"
+        android:layout_gravity="end"
+        android:textAllCaps="false"
+        android:textSize="14sp"/>-->
+</LinearLayout>

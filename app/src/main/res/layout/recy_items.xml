@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/invoice_item_id"
+
+            android:textSize="16sp"
+            android:padding="2dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-medium"
+            app:fontFamily="sans-serif-light"
+            android:background="@color/black">
+
+        </TextView>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/invoice_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_light"
+                android:text="product name"
+                android:textColor="@color/black"
+                android:textSize="16sp">
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/invoice_item_price"
+                    android:layout_weight="1"
+                    android:text="200"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_light"
+                    >
+
+                </TextView>
+                <TextView
+
+                    android:layout_weight="1"
+                    android:text="*"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_light"
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/invoice_itemintoqty"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_light"
+                    >
+
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/invoice_item_subtotal"
+            android:layout_weight=".5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33"
+            android:singleLine="true"
+            android:layout_marginRight="2dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="end"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_light">
+
+        </TextView>
+        <ImageView
+            android:id="@+id/invoice_item_delete"
+            android:background="@drawable/ic_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:layout_gravity="center_vertical"
+            >
+
+        </ImageView>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
