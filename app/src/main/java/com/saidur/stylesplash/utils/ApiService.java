@@ -11,6 +11,8 @@ import com.saidur.stylesplash.ui.order.trackorder.inprocess.model.InpRP;
 import com.saidur.stylesplash.ui.order.trackorder.track.TrackIdRP;
 import com.saidur.stylesplash.ui.order.trackorder.track.TrackRP;
 import com.saidur.stylesplash.ui.product.network.StockRP;
+import com.saidur.stylesplash.ui.report.SorRP;
+import com.saidur.stylesplash.ui.report.StuffRP;
 
 
 import java.util.ArrayList;
@@ -89,6 +91,15 @@ public interface ApiService {
     //Done--getall customer list
     @GET("Authapi/get_customer_data")
     Call<CustomerRP> getAllCustomer();
+
+    //Done--getall stuff list
+    @GET("Authapi/get_staf_data")
+    Call<StuffRP> getAllStuff();
+
+    //get stuff order report
+    @FormUrlEncoded
+    @POST("Authapi/post_order_search_data")
+    Call<SorRP> getStuffOReport(@FieldMap Map<String, String> params);
 
     //Done get all product list
     @GET("Authapi/get_product_stock_data")

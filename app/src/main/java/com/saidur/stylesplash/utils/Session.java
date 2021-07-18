@@ -31,7 +31,7 @@ public class Session {
         editor=sharedPreferences.edit();
     }
 
-    public void saveSessaion(String uid,String empid,String Compid,String Compname,String userName,String uMobile,String email,String role){
+    public void saveSessaion(String uid,String empid,String Compid,String Compname,String userName,String uMobile,String email,String urole){
         editor.putBoolean(IS_Login,true);
         editor.putString(UID,uid);
         editor.putString(Empid,empid);
@@ -41,7 +41,7 @@ public class Session {
         editor.putString(UserName,userName);
         editor.putString(UserMobile,uMobile);
         editor.putString(UserEmail,email);
-        editor.putString(UserRole,role);
+        editor.putString(UserRole,urole);
         editor.commit();
     }
 
@@ -53,6 +53,7 @@ public class Session {
         UserData.put(UserName,sharedPreferences.getString(UserName,null));
         UserData.put(UserMobile,sharedPreferences.getString(UserMobile,null));
         UserData.put(Empid,sharedPreferences.getString(Empid,null));
+        UserData.put(UserRole,sharedPreferences.getString(UserRole,null));
         return UserData;
     }
 

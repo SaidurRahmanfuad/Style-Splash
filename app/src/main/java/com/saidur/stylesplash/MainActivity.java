@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         usermap = session.getUserInfo();
         username = usermap.get(Session.UserName);
         usermobile = usermap.get(Session.UserMobile);
+       // userrole = usermap.get(Session.UserRole);
 
         View headerView = navigationView.getHeaderView(0);
         loguserName = headerView.findViewById(R.id.loguserNameTv);

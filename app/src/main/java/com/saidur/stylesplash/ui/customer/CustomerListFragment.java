@@ -54,7 +54,7 @@ public class CustomerListFragment extends Fragment {
         pd.setCancelable(false);
         pd.show();
         custListVM = new ViewModelProvider(this).get(CustListVM.class);
-        custListVM.AllCustApiCall();
+        custListVM.AllCustApiCall("fromcustomerlist");
         prepareRecyclerView(v);
         custListVM.getAllcustObserver().observe(getViewLifecycleOwner(), new Observer<List<CustomerListData>>() {
             @Override
@@ -83,7 +83,7 @@ public class CustomerListFragment extends Fragment {
         swip_cust.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                custListVM.AllCustApiCall();
+                custListVM.AllCustApiCall("fromcustomerlistswip");
                 swip_cust.setRefreshing(false);
             }
         });

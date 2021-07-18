@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.saidur.stylesplash.R;
-import com.saidur.stylesplash.ui.order.adapter.TabpreAdapter;
 
 public class ProductMainActivity extends AppCompatActivity {
     TabLayout tabLayout;

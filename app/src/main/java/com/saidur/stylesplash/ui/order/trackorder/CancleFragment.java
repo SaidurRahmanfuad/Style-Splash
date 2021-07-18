@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.saidur.stylesplash.R;
 import com.saidur.stylesplash.ui.customer.network.CustomerListData;
@@ -53,7 +54,11 @@ CancelListAdapter cancelListAdapter;
                 canceltest=cancleData;
                 cancelListAdapter.setCancelList(cancleData);
                 rv_canclelist.setAdapter(cancelListAdapter);
-
+                int count = 0;
+                if (cancelListAdapter != null) {
+                    count = cancelListAdapter.getItemCount();
+                }
+                Toast.makeText(getActivity(), "Total Cancel : "+count, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -422,9 +422,9 @@ public class OrderListVM extends AndroidViewModel {
             @Override
             public void onResponse(Call<AddOrderRP> call, Response<AddOrderRP> response) {
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful()||response.body().getMessage().equals("Order added Success")) {
                     //Toast.makeText(getApplication(), "oidapi "+response.body().toString(), Toast.LENGTH_SHORT).show();
-                    AdorderOid.setValue(response.body().data);
+                    AdorderOid.setValue(String.valueOf(response.body().data));
                 } else {
                     AdorderOid.setValue(null);
                 }

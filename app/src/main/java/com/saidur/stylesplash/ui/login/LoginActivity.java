@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,6 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        pd =new ProgressDialog(LoginActivity.this);
+        pd.setMessage("Loging...");
+        pd.setCancelable(true);
+
         loginVM = new ViewModelProvider(this).get(LoginVM.class);
         initView();
 
@@ -65,9 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     loginFun();
 
                 }
-                Intent in = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(in);
-                finish();
+
 
                 break;
         }
@@ -100,18 +103,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginFun() {
-        sessionManagement = new Session(LoginActivity.this);
+        pd.show();
+       // sessionManagement = new Session(LoginActivity.this);
         HashMap<String, String> loginMap = new HashMap<>();
-        //  loginMap.put("username",dManLoginId.getText().toString().trim());
         loginMap.put("username", loginId);
         loginMap.put("password", loginPass);
-        // loginMap.put("password",dManLoginPass.getText().toString().trim());
         loginVM.LoginApiCall(loginMap);
         loginVM.getLoginUserDataObserver().observe(this, new Observer<LoginData>() {
             @Override
             public void onChanged(LoginData loginData) {
-                logUserData = loginData;
-                logUserData.getPhoto();
+                if(loginData !=null)
+                {
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    logUserData = loginData;
+                    logUserData.getPhoto();
+                       if(loginData.getUserrole()!=null)
+                       {
+                           pd.dismiss();
+                           Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                           startActivity(in);
+                           finish();
+                       }
+                       else {
+                           Toast.makeText(LoginActivity.this, "Login role not found"+loginData.getUserrole(), Toast.LENGTH_SHORT).show();
+                       }
+                }
+
 
             }
         });

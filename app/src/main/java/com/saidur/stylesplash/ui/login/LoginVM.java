@@ -22,12 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginVM extends AndroidViewModel {
-   private MutableLiveData <LoginData> loginUserData;
+   public MutableLiveData <LoginData> loginUserData;
    Session sessionManagement;
     public LoginVM(@NonNull Application application) {
         super(application);
         loginUserData=new MutableLiveData<>();
-        sessionManagement = new Session(application);
     }
    public MutableLiveData <LoginData>getLoginUserDataObserver()
    {
@@ -39,14 +38,18 @@ public class LoginVM extends AndroidViewModel {
         call.enqueue(new Callback<LoginRP>() {
             @Override
             public void onResponse(Call<LoginRP> call, Response<LoginRP> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body().getMessage().equals("User found")) {
                    // loginUserData.setValue(response.body().getData());
                     LoginData logUserData=response.body().getData();
+
+                    loginUserData.setValue(response.body().getData());
                     Log.d("test","uidsaa : "+logUserData.getUid());
-                    Toast.makeText(getApplication(), ""+logUserData.getUid(), Toast.LENGTH_SHORT).show();
+
+                    sessionManagement = new Session(getApplication());
                     sessionManagement.saveSessaion(logUserData.getUid(), logUserData.getEmpid(), logUserData.getCompid(), logUserData.getCompname(),
                             logUserData.getName(), logUserData.getMobile(), logUserData.getEmail(), logUserData.getUserrole());
                     Toast.makeText(getApplication(), ""+ logUserData.getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "User role after "+ logUserData.getUserrole(), Toast.LENGTH_SHORT).show();
                    // loginUserData.getValue().get(0).getCompid();
                    // sessionManagement.saveSessaion(user.getUid(), user.getEmpid(), user.getName(), user.getMobile(),user.getUserrole());
                 } else {

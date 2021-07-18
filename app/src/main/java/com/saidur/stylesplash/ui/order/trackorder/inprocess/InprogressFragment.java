@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.saidur.stylesplash.R;
 import com.saidur.stylesplash.ui.order.OrderListVM;
@@ -52,6 +53,12 @@ public class InprogressFragment extends Fragment {
                 inprocessListAdapter.setInprocessList(cancleData);
                 rv_inplist.setAdapter(inprocessListAdapter);
                 Inplist=cancleData;
+
+                int count = 0;
+                if (inprocessListAdapter != null) {
+                    count = inprocessListAdapter.getItemCount();
+                }
+                Toast.makeText(getActivity(), "Total Inprocess : "+count, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -245,8 +245,8 @@ public class TrackOrderActivity extends AppCompatActivity implements ClickInterf
                         // trackidAdapter.setTrackidList(oids);
                         trackidAdapter = new TrackidAdapter(TrackOrderActivity.this, oids,TrackOrderActivity.this);
                         LinearLayoutManager layoutManager
-                                = new LinearLayoutManager(TrackOrderActivity.this, LinearLayoutManager.HORIZONTAL, false);
-
+                                = new LinearLayoutManager(TrackOrderActivity.this, LinearLayoutManager.HORIZONTAL, true);
+                        layoutManager.setStackFromEnd(true);
                         rv_trackid.setLayoutManager(layoutManager);
                         rv_trackid.setAdapter(trackidAdapter);
                     } else {

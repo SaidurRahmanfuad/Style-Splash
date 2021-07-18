@@ -1,7 +1,10 @@
 package com.saidur.stylesplash.ui.customer.network;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.saidur.stylesplash.utils.Const;
 
 public class CustomerListData {
     @SerializedName("customerID")
@@ -44,6 +47,7 @@ public class CustomerListData {
     @Expose
     private String update;
 
+    public String from;
     public CustomerListData() {
     }
 
@@ -167,8 +171,27 @@ public class CustomerListData {
         this.update = update;
     }
 
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public CustomerListData(String from) {
+        this.from = from;
+    }
+
     @Override
     public String toString() {
-        return  customerName;
+        if(from.equals("fromaddcustomer"))
+        {
+            return  mobile;
+        }
+        else {
+            return mobile +"("+customerName+")";
+        }
+
     }
 }

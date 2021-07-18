@@ -13,6 +13,10 @@
 
         <action android:id="@+id/goto_home_to_trackorderAc"
             app:destination="@+id/nav_otrack"/>
+        <action android:id="@+id/goto_home_to_stuffreportorderAc"
+            app:destination="@+id/nav_sorep"/>
+        <action android:id="@+id/goto_home_to_dailyreport"
+            app:destination="@+id/nav_orderlist"/>
 
         <action android:id="@+id/goto_home_to_productstock"
             app:destination="@+id/men_ps"/>
@@ -33,11 +37,10 @@
 
     </fragment>
 
-    <!--<fragment
+    <fragment
         android:id="@+id/nav_orderlist"
         android:name="com.saidur.stylesplash.ui.order.OrderListFragment"
-        android:label="@string/menu_olist"
-        tools:layout="@layout/fragment_order_list" />-->
+        tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/men_ps"
         android:name="com.saidur.stylesplash.ui.product.ProductStockFragment"
@@ -105,4 +108,8 @@
         android:name="com.saidur.stylesplash.ui.order.InvoiceActivity"
         android:label="@string/menu_invoice"
         />
+    <activity
+        android:id="@+id/nav_sorep"
+        android:name="com.saidur.stylesplash.ui.report.StaffOrderReport"
+        tools:layout="@layout/activity_staff_order_report" />
 </navigation>

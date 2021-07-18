@@ -126,48 +126,114 @@
                 </com.google.android.material.textfield.TextInputLayout>
 -->
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:id="@+id/userll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/date">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_cust"
-                        android:layout_weight="1"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="1dp"
-                        android:fontFamily="@font/roboto_light"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tag_addproductlayout">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/add_cust_spinner"
+                        android:layout_marginEnd="10dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_cust"
+                            android:layout_weight="1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="1dp"
                             android:fontFamily="@font/roboto_light"
-                            android:hint="Select Customer *"
-                            android:completionThreshold="1"
-                            android:singleLine="true"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <ImageView
-                        android:id="@+id/addnewcustBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_baseline_add_24"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@color/colorMain"
-                        app:tint="@color/white"
-                        />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tag_addproductlayout">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/add_cust_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_light"
+                                android:hint="Select Customer *"
+                                android:completionThreshold="1"
+                                android:maxLength="11"
+                                android:singleLine="true"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <ImageView
+                            android:id="@+id/addnewcustBtn"
+                            android:visibility="gone"
+                            android:layout_width="@dimen/_38sdp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_add_24"
+                            android:layout_marginTop="10dp"
+
+                            android:background="@color/colorMain"
+                            app:tint="@color/white"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/newcuslayout"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_weight="1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/roboto_light"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tag_addproductlayout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/add_newcust_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_light"
+                                android:hint="Customer Name*"
+                                android:completionThreshold="1"
+                                android:singleLine="true"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_weight="1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/roboto_light"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tag_addproductlayout">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/add_newcust_add"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_light"
+                                android:hint="Address*"
+                                android:completionThreshold="1"
+                                android:singleLine="true"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_shipping"
@@ -307,7 +373,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+          <!--      <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_category"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
@@ -329,7 +395,7 @@
                         android:inputType="none"
                         android:singleLine="true"
                         android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -337,17 +403,38 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Delivery *"
+                        android:text="Delivery Charge*"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Amount"
+                        app:startIconTint="#00C853">
 
-                    <RadioGroup
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add_productdcharge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                 <!--   <RadioGroup
                         android:id="@+id/rg_delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -417,10 +504,10 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                 </LinearLayout>
-                <androidx.cardview.widget.CardView
+                <!--<androidx.cardview.widget.CardView
                     android:id="@+id/totalhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -545,7 +632,7 @@
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -567,6 +654,28 @@
                         android:textSize="14sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:hint="Note"
+                    app:startIconTint="#00C853">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/add_productnote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
 

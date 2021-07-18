@@ -22,6 +22,7 @@ import com.saidur.stylesplash.R;
 import com.saidur.stylesplash.ui.order.InvoiceActivity;
 import com.saidur.stylesplash.ui.order.OrderListVM;
 import com.saidur.stylesplash.ui.order.network.OrderListData;
+import com.saidur.stylesplash.ui.order.trackorder.Counter;
 import com.saidur.stylesplash.ui.product.network.StockData;
 import com.saidur.stylesplash.utils.Const;
 import com.saidur.stylesplash.utils.Session;
@@ -41,6 +42,11 @@ public class AllOrderAdapter extends RecyclerView.Adapter<AllOrderAdapter.Allord
     List<OrderListData> orderList;
 
 
+ /*   public AllOrderAdapter(Context context,Counter counter) {
+        this.context = context;
+        this.counter = counter;
+    }*/
+
     public AllOrderAdapter(Context context, List<OrderListData> orderList) {
         this.context = context;
         this.orderList = orderList;
@@ -58,6 +64,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<AllOrderAdapter.Allord
     public void onBindViewHolder(@NonNull AllorderVH holder, int position) {
         if (orderList != null) {
             OrderListData ct = orderList.get(position);
+           // counter.ToalAllOrder(112);
             holder.ocodeTv.setText(ct.getoCode());
             holder.custNameTv.setText(ct.getCustomerName());
             holder.custNumberTv.setText(ct.getMobile());
@@ -65,6 +72,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<AllOrderAdapter.Allord
             holder.dateTv.setText(ct.getoDate());
             holder.deliveryTv.setText(ct.getdOption());
            // holder.statusTv.setText(ct.getStatus());
+
 
             holder.oid = ct.getOid();
             holder.customerID = ct.getCustid();
@@ -169,11 +177,17 @@ public class AllOrderAdapter extends RecyclerView.Adapter<AllOrderAdapter.Allord
     public int getItemCount() {
         if (orderList != null) {
             return orderList.size();
+
         } else {
             return 0;
         }
 
     }
+ /*   public void setToalOrder(List<OrderListData> orderlist) {
+        orderList = orderlist;
+        counter.ToalAllOrder(orderList.size());
+        notifyDataSetChanged();
+    }*/
 
     public void setOrderList(List<OrderListData> orderlist) {
         orderList = orderlist;
@@ -202,6 +216,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter<AllOrderAdapter.Allord
             deliveryTv = v.findViewById(R.id.deliveryTv);
             statusTv = v.findViewById(R.id.statusTv);
             orderActionTv = v.findViewById(R.id.orderAction);
+
 
 
         }

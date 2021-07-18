@@ -2,6 +2,7 @@ package com.saidur.stylesplash.ui.order;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,7 +29,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -52,39 +57,40 @@ import java.util.List;
 import java.util.Locale;
 
 public class AddOrderFragment extends Fragment implements View.OnClickListener {
-    TextView deliveryCrg, productPrice, totalprice, qty;
+    TextView /*deliveryCrg,*/ productPrice, totalprice, qty;
     Button add_productSave;
     private RadioGroup rg_delivery;
     CardView totalhead;
     String delicrg, insidecrg, outsidecrg;
     String insideClick, outsideClick, doption;
     private RadioButton insideY, outsideN;
-    int totalin, totalout, postotalamount, postShip;
+    int totalin, totalout, postotalamount, postShip,postDcharg;
 
-    AutoCompleteTextView add_productact_spinner, add_cust_spinner,add_shipping_spinner;
+    AutoCompleteTextView add_productact_spinner, add_cust_spinner, add_shipping_spinner;
     OrderListVM orderListVM;
     CustListVM custListVM;
     List<StockData> spinnerProductlist;
-    String custId, custMobile, totalPrice, shiping_cost, dOption, note, uid,oid;
-    String shipname;
+    String custId, custMobile, totalPrice, shiping_cost, dOption, notes, uid, oid;
+    String shipnamen;
 
     ArrayAdapter<StockData> productsAdapter;
     ArrayAdapter<CustomerListData> custAdapter;
     ArrayAdapter<ShippingModel> shipAdapter;
-    String sprice, selectedProductName;
+    String sprice,editedsprice, selectedProductName;
     Dialog popAddQty;
-    TextView gp,dp,popupItemName, popupItemPrice, totalsubtotalTv, finaltotalTv, finaldueTv, finalpaidTv, date;
-    String selectedProductId, itemSubtotal, itemqty, today,tdayshow;
-    TextInputEditText popupItemQty, add_productpayment;
+    TextView gp, dp, popupItemName, totalsubtotalTv, finaltotalTv, finaldueTv, finalpaidTv, date;
+    EditText popupItemPrice;
+    String selectedProductId, itemSubtotal, itemqty, today, tdayshow;
+    TextInputEditText popupItemQty, add_productpayment,addnote,deliverycrg;
     Button addqtybtn;
     ArrayList<StockData> itemList;
     ItemsAdapter itemsAdapter;
     RecyclerView rv_items;
-    int item_totalSubtotalPrice, scrgint, pamountint,selectedpos;
+    int item_totalSubtotalPrice, scrgint, pamountint, selectedpos;
 
 
     Session session;
-    HashMap<String,String>getUserInfo;
+    HashMap<String, String> getUserInfo;
 
 
     ArrayList<String> serialList;
@@ -94,9 +100,15 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
     ArrayList<String> totalpricelist;
 
     ArrayList<ShippingModel> shippings;
-//add new customer
+    //add new customer
     ImageView addnewcustBtn;
 
+    ProgressDialog pd;
+
+    //new cust add
+    TextInputEditText newcusName,newcusadd;
+    String newcusnamepost,newcusmobilepost,newcusaddpost;
+    LinearLayout newcuslayout;
     public AddOrderFragment() {
         // Required empty public constructor
     }
@@ -107,26 +119,30 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_order, container, false);
 
-        Const.gotoinv="AddOrderFragment";
+        Const.gotoinv = "AddOrderFragment";
         orderListVM = new ViewModelProvider(this).get(OrderListVM.class);
         session = new Session(getActivity());
-        getUserInfo=session.getUserInfo();
-        uid=getUserInfo.get(Session.UID);
+        getUserInfo = session.getUserInfo();
+        uid = getUserInfo.get(Session.UID);
 
         custListVM = new ViewModelProvider(this).get(CustListVM.class);
         today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         tdayshow = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(new Date());
         initView(v);
         iniPopup();
-        rgactins(v);
+        //rgactins(v);
+
+        pd=new ProgressDialog(getActivity());
+        pd.setMessage("Order saving...");
+        pd.setCancelable(false);
+
+
 
         orderListVM.getAllStockObserver().observe(getViewLifecycleOwner(), new Observer<List<StockData>>() {
             @Override
             public void onChanged(List<StockData> stockData) {
                 if (stockData != null) {
-                    //spinnerProductlist=stockData;
-                  //  Log.d("TAG", "onChanged: " + stockData.toString());
-                    //  productsAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_product, spinnerProductlist);
+
                     productsAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_product, stockData);
                     add_productact_spinner.setAdapter(productsAdapter);
                     add_productact_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,35 +157,54 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                             selectedProductId = cmm.getProduct();
                             selectedProductName = cmm.getProductName();
                             popupItemName.setText(selectedProductName);
+
                             popupItemPrice.setText(sprice);
 
-                            if(cmm.getTotalPices()==null)
-                            {
+                            if (cmm.getTotalPices() == null) {
                                 gp.setText("0");
-                            }else {
+                            } else {
                                 gp.setText(cmm.getTotalPices());
                             }
-                            if(cmm.getDtquantity()==null)
-                            {
+                            if (cmm.getDtquantity() == null) {
                                 dp.setText("0");
+                            } else {
+                                dp.setText(cmm.getDtquantity());
                             }
-                            else {dp.setText(cmm.getDtquantity());}
 
                             popAddQty.show();
-
-                          /*  Toast.makeText(getActivity(), "selectedProductId : " + selectedProductId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getActivity(), "sprice : " + sprice, Toast.LENGTH_SHORT).show();*/
                         }
                     });
                 }
             }
         });
         orderListVM.AllStockApiCall();
+        add_cust_spinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(add_cust_spinner.getText().toString().isEmpty())
+                {
+                    addnewcustBtn.setVisibility(View.GONE);
+                    newcuslayout.setVisibility(View.GONE);
+                }else {
+                    addnewcustBtn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         custListVM.getAllcustObserver().observe(getViewLifecycleOwner(), new Observer<List<CustomerListData>>() {
             @Override
             public void onChanged(List<CustomerListData> customerListData) {
                 custAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_product, customerListData);
                 add_cust_spinner.setAdapter(custAdapter);
+
                 add_cust_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
@@ -178,40 +213,52 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
 
                         custId = cmm.getCustomerID();
                         custMobile = cmm.getMobile();
-/*
-                        Toast.makeText(getActivity(), "cust Id  : " + custId, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getActivity(), "custMobile  : " + custMobile, Toast.LENGTH_SHORT).show();*/
+                        if(!custId.isEmpty()){
+                            addnewcustBtn.setVisibility(View.GONE);
+                            newcuslayout.setVisibility(View.GONE);
+                        }
+
                     }
                 });
+
             }
         });
-        custListVM.AllCustApiCall();
+        custListVM.AllCustApiCall("fromAddorder");
+
         orderListVM.adorderOidrObserver().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if(!s.isEmpty())
-                {
-                    Const.gotoinv="AddOrderFragment";
-                    oid=s;
-                    sendToInvoice(oid);
-/*
-                    Toast.makeText(getActivity(), "tt"+oid, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "tts"+s, Toast.LENGTH_SHORT).show();*/
+                if (!s.isEmpty()) {
+                    pd.dismiss();
+                    try {
+                        Const.gotoinv = "AddOrderFragment";
+                        oid = s;
+                        sendToInvoice(oid);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    try {
+                        Toast.makeText(getActivity(), "Order id not found "+oid, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
         });
-        shipping_data();
+        //  shipping_data();
         return v;
     }
 
     private void shipping_data() {
-        shippings=new ArrayList<>();
-        shippings.add(new ShippingModel("0","Redx"));
-        shippings.add(new ShippingModel("1","Patho"));
-        shippings.add(new ShippingModel("2","Sundorban"));
-        shippings.add(new ShippingModel("3","SA Poribahon"));
-        shippings.add(new ShippingModel("4","Showroon"));
+        shippings = new ArrayList<>();
+        shippings.add(new ShippingModel("0", "Redx"));
+        shippings.add(new ShippingModel("1", "Patho"));
+        shippings.add(new ShippingModel("2", "Sundorban"));
+        shippings.add(new ShippingModel("3", "SA Poribahon"));
+        shippings.add(new ShippingModel("4", "Showroon"));
 
 
         shipAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_product, shippings);
@@ -221,7 +268,7 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 ShippingModel ad = (ShippingModel) shipAdapter.getItem(position);
-                shipname = ad.getName();
+               // shipname = ad.getName();
             }
         });
     }
@@ -232,15 +279,13 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
         sellpricelist.clear();
         totalpricelist.clear();
         add_productpayment.setText("");
-          if(oid!=null)
-                {
-                    Intent goinv=new Intent(getActivity(),InvoiceActivity.class);
-                    goinv.putExtra("ioid",oid);
-                    startActivity(goinv);
-                }
-                else {
-                    Toast.makeText(getActivity(), "oid not found", Toast.LENGTH_SHORT).show();
-                }
+        if (oid != null) {
+            Intent goinv = new Intent(getActivity(), InvoiceActivity.class);
+            goinv.putExtra("ioid", oid);
+            startActivity(goinv);
+        } else {
+            Toast.makeText(getActivity(), "oid not found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void iniPopup() {
@@ -252,7 +297,6 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
         popAddQty.getWindow().getAttributes().gravity = Gravity.CENTER;
 
         // ini popup widgets
-
         popupItemName = popAddQty.findViewById(R.id.pName);
         popupItemQty = popAddQty.findViewById(R.id.inputQty);
 
@@ -269,20 +313,15 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                     itemqty = popupItemQty.getText().toString();
                     int qty, ssprice, isubtotal;
                     qty = Integer.valueOf(itemqty);
-                    ssprice = Integer.valueOf(sprice);
+
+                    ssprice = Integer.valueOf(popupItemPrice.getText().toString());
+                    editedsprice=String.valueOf(ssprice);
                     isubtotal = ssprice * qty;
                     itemSubtotal = String.valueOf(isubtotal);
 
-                    String dunitprice = String.valueOf(sprice);
-                    // Integer ditemSubtotal=Integer.parseInt(itemSubtotal);
-
-                    StockData isitm = new StockData(selectedProductId, selectedProductName, sprice, itemqty, itemSubtotal);
+                    StockData isitm = new StockData(selectedProductId, selectedProductName, editedsprice, itemqty, itemSubtotal);
                     itemList.add(isitm);
-                    //itemList.add(new Invoice_Single_item(selectedProductName, selectedProductPrice, fsubtotal, itemqty));
-                  /*  Toast.makeText(getActivity(), "product id : " + selectedProductId, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "sprice  : " + sprice, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "itemqty  : " + itemqty, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "itemSubtotal  : " + itemSubtotal, Toast.LENGTH_SHORT).show();*/
+
                     itemsAdapter = new ItemsAdapter(getActivity(), itemList);
                     rv_items.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_items.setHasFixedSize(true);
@@ -301,7 +340,7 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                     serialList.add(String.valueOf(selectedpos));
                     pidlist.add(selectedProductId);
                     pqtylist.add(itemqty);
-                    sellpricelist.add(sprice);
+                    sellpricelist.add(editedsprice);
                     totalpricelist.add(itemSubtotal);
 
                     popAddQty.dismiss();
@@ -324,20 +363,24 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
         sellpricelist = new ArrayList<>();
         totalpricelist = new ArrayList<>();
 
+        addnote = v.findViewById(R.id.add_productnote);
+        deliverycrg = v.findViewById(R.id.add_productdcharge);
+        notes=addnote.getText().toString();
         date = v.findViewById(R.id.date);
         date.setText(tdayshow);
         add_productpayment = v.findViewById(R.id.add_productpayment);
         totalsubtotalTv = v.findViewById(R.id.totalsubtotal);
         rv_items = v.findViewById(R.id.rv_items);
         add_productact_spinner = v.findViewById(R.id.add_productact_spinner);
-        add_shipping_spinner = v.findViewById(R.id.add_shipping_spinner);
+        //new cust add
+        newcuslayout = v.findViewById(R.id.newcuslayout);
+
+        newcusName = v.findViewById(R.id.add_newcust_name);
+       // newcusMob = v.findViewById(R.id.add_newcust_mob);
+        newcusadd = v.findViewById(R.id.add_newcust_add);
+
 
         add_cust_spinner = v.findViewById(R.id.add_cust_spinner);
-        rg_delivery = v.findViewById(R.id.rg_delivery);
-        totalhead = v.findViewById(R.id.totalhead);
-
-        deliveryCrg = v.findViewById(R.id.deliveryCrg);
-        productPrice = v.findViewById(R.id.productPrice);
         totalprice = v.findViewById(R.id.totalprice);
         add_productSave = v.findViewById(R.id.add_productSave);
         add_productSave.setOnClickListener(this);
@@ -355,23 +398,23 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                 insideClick = insideY.getText().toString();
                 if (insideClick.equals("Inside Dhaka")) {
                     totalhead.setVisibility(View.VISIBLE);
-                    deliveryCrg.setText("60");
+                   // deliveryCrg.setText("60");
                     totalin = item_totalSubtotalPrice + 60;
                     productPrice.setText(String.valueOf(item_totalSubtotalPrice));
                     totalprice.setText(String.valueOf(totalin));
 
                     postotalamount = totalin;
-                    postShip = 60;
+                   // postShip = 60;
                     doption = "Inside Dhaka";
                 }
                 if (insideClick.equals("Outside Dhaka")) {
                     totalhead.setVisibility(View.VISIBLE);
-                    deliveryCrg.setText("120");
+                   // deliveryCrg.setText("120");
                     totalout = item_totalSubtotalPrice + 120;
                     productPrice.setText(String.valueOf(item_totalSubtotalPrice));
                     totalprice.setText(String.valueOf(totalout));
                     postotalamount = totalout;
-                    postShip = 120;
+                   // postShip = 120;
                     doption = "Outside Dhaka";
                 }
 
@@ -388,17 +431,54 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_productSave:
+                pd.show();
+
+                if(deliverycrg.getText().toString().isEmpty())
+                {
+                    postDcharg=0;
+                }
+                else {
+                    postDcharg =Integer.parseInt(deliverycrg.getText().toString());
+                }
+                postotalamount=item_totalSubtotalPrice + postDcharg;
                 HashMap<String, String> map = new HashMap<>();
                 map.put("date", today);
                 map.put("customerID", custId);
                 map.put("totalAmount", String.valueOf(postotalamount));
-                map.put("shiping_cost", String.valueOf(postShip));
-                map.put("paidAmount", add_productpayment.getText().toString());
-                map.put("dOption", doption);
-                map.put("shmethod", shipname);
-                map.put("note", "default");
-                map.put("uid", uid);
 
+                if(deliverycrg.getText().toString().isEmpty())
+                {
+                    map.put("shiping_cost", "0");
+                } else {
+                    map.put("shiping_cost", deliverycrg.getText().toString().trim());
+                }
+                if(add_productpayment.getText().toString().isEmpty())
+                {
+                    map.put("paidAmount", "0");
+                } else {
+                    map.put("paidAmount", add_productpayment.getText().toString());
+                }
+                map.put("dOption","" /*doption*/);
+               // map.put("shmethod","" /*shipname*/);
+                if(addnote.getText().toString().isEmpty())
+                {
+                    map.put("note", "no note");
+                } else {
+                   map.put("note", addnote.getText().toString().trim());
+                }
+
+                newcusnamepost=newcusName.getText().toString().trim();
+                newcusaddpost=newcusadd.getText().toString().trim();
+                newcusmobilepost=add_cust_spinner.getText().toString();
+
+                map.put("newcust_name",newcusnamepost);
+                map.put("newcust_mobile",newcusmobilepost);
+                map.put("newcust_add",newcusaddpost);
+
+                map.put("uid", uid);
+                Log.d("agfh", "newcust_name: " + newcusnamepost);
+                Log.d("agfh", "newcust_mobile: " + newcusmobilepost);
+                Log.d("agfh", "newcust_add: " + newcusaddpost);
 
                 Log.d("agfh", "today: " + today);
                 Log.d("agfh", "custId: " + custId);
@@ -411,26 +491,35 @@ public class AddOrderFragment extends Fragment implements View.OnClickListener {
                 Log.d("agfh", "sellpricelist: " + sellpricelist);
                 Log.d("agfh", "pqtylist: " + pqtylist);
                 Log.d("agfh", "totalpricelist: " + totalpricelist);
+                Log.d("agfh", "note: " + notes);
 
                 orderListVM.SaveOrderApiCall(map, pidlist, sellpricelist, pqtylist, totalpricelist);
-
-                //Toast.makeText(getActivity(), "add order oid"+oid, Toast.LENGTH_SHORT).show();
-
-
                 // Navigation.findNavController(v).navigate(R.id.goto_addOrder_to_invoice);
                 break;
 
             case R.id.addnewcustBtn:
-                Navigation.findNavController(v).navigate(R.id.goto_addOrder_to_addcust);
-             //   moveToActivity(getActivity(), NewProductActivity.class);
+                //Navigation.findNavController(v).navigate(R.id.goto_addOrder_to_addcust);
+                //   moveToActivity(getActivity(), NewProductActivity.class);
+                newcuslayout.setVisibility(View.VISIBLE);
+
+                //newcusmobilepost=add_cust_spinner.getText().toString();
+                newcusnamepost=newcusName.getText().toString();
+                newcusaddpost =newcusadd.getText().toString();
+
+              /*  if(!add_cust_spinner.getText().toString().isEmpty() && custId!=null)
+                {
+                    newcuslayout.setVisibility(View.GONE);
+                    custId = cmm.getCustomerID();
+                    custMobile = cmm.getMobile();
+                }
+                else if(!add_cust_spinner.getText().toString().isEmpty() && cmm.getCustomerID()==null){
+                    newcuslayout.setVisibility(View.VISIBLE);
+                    custId = cmm.getCustomerID();
+                    custMobile=add_cust_spinner.getText().toString();
+                }*/
                 break;
         }
 
     }
 
-   /* public void moveToActivity(FragmentActivity fragmentActivity, Class<? extends Activity> activity) {
-        startActivity(new Intent(getActivity(), activity));
-        getActivity().overridePendingTransition(R.anim.fade_in,
-                R.anim.fade_out);
-    }*/
 }
